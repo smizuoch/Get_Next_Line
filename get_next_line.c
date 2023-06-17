@@ -6,7 +6,7 @@
 /*   By: smizuoch <smizuoch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 11:14:41 by smizuoch          #+#    #+#             */
-/*   Updated: 2023/06/16 15:42:37 by smizuoch         ###   ########.fr       */
+/*   Updated: 2023/06/17 12:47:55 by smizuoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,12 @@ static char	*save_buf(int fd, char *buf, char *save)
 	ssize_t	read_size;
 	char	*tmp;
 
-	buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!buf)
-		return (NULL);
 	read_size = 1;
 	while (!ft_strchr(save, '\n') && read_size != 0)
 	{
 		read_size = read (fd, buf, BUFFER_SIZE);
 		if (read_size == -1)
-		{
-			free (buf);
 			return (NULL);
-		}
 		if (read_size == 0)
 			break ;
 		buf[read_size] = '\0';
@@ -43,7 +37,6 @@ static char	*save_buf(int fd, char *buf, char *save)
 		if (!save)
 			break ;
 	}
-	free (buf);
 	buf = NULL;
 	return (save);
 }
@@ -100,11 +93,10 @@ static char	*save_save(char *save)
 
 char	*get_next_line(int fd)
 {
-	char		*buf;
+	char		buf[BUFFER_SIZE + 1];
 	char		*line;
 	static char	*save;
 
-	buf = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX)
 		return (NULL);
 	save = save_buf(fd, buf, save);
