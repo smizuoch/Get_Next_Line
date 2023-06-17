@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smizuoch <smizuoch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 11:14:41 by smizuoch          #+#    #+#             */
-/*   Updated: 2023/06/17 12:50:48 by smizuoch         ###   ########.fr       */
+/*   Updated: 2023/06/17 12:53:47 by smizuoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"get_next_line.h"
+#include"get_next_line_bonus.h"
 
 static char	*save_buf(int fd, char *buf, char *save)
 {
@@ -95,20 +95,20 @@ char	*get_next_line(int fd)
 {
 	char		buf[BUFFER_SIZE + 1];
 	char		*line;
-	static char	*save;
+	static char	*save[OPEN_MAX + 1];
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX)
 		return (NULL);
-	save = save_buf(fd, buf, save);
-	if (!save)
+	save[fd] = save_buf(fd, buf, save[fd]);
+	if (!save[fd])
 		return (NULL);
-	line = line_s(save);
+	line = line_s(save[fd]);
 	if (!line)
 	{
-		free (save);
+		free (save[fd]);
 		return (NULL);
 	}
-	save = save_save(save);
+	save[fd] = save_save(save[fd]);
 	return (line);
 }
 

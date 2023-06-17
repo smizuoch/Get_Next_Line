@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smizuoch <smizuoch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 11:18:42 by smizuoch          #+#    #+#             */
-/*   Updated: 2023/06/17 12:50:45 by smizuoch         ###   ########.fr       */
+/*   Updated: 2023/06/17 12:01:00 by smizuoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"get_next_line.h"
+#include"get_next_line_bonus.h"
 
 size_t	ft_strlens(const char *s)
 {
